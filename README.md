@@ -10,4 +10,4 @@
 - [Link of the course on Udemy](https://www.udemy.com/course/mastering-microcontroller-with-peripheral-driver-development/)
 
 
-- [My Progress of this Course](./main/Progress%20of%20ARM%20Course%201%20_%201%29Mastering%20Microcontroller%20with%20Embedded%20Driver%20Development%20.xlsx)
+- [My Progress of this Course](./blob/main/Progress%20of%20ARM%20Course%201%20_%201%29Mastering%20Microcontroller%20with%20Embedded%20Driver%20Development%20.xlsx)
