@@ -1,0 +1,154 @@
+/*
+ * 002_LED_Button.c
+ *
+ *  Created on: Jun 29, 2024
+ *      Author:
+ */
+
+
+
+#include "stm32f407xx_gpio_driver.h"
+
+
+#define HIGH 				1
+#define BUTTON_PRESSED 		HIGH		// for the button Configuration : Button Connected with on-Board Pull Down Circuit , & No Internal Pull up or Pull Down is Activated by software
+
+
+
+
+// functions Prototypes
+
+void delay(void); // simple delay function
+
+int main(void)
+{
+	/* Configuration & initialization of the LED  */
+	GPIO_Handle_t GpioLed , GpioButton ;
+	GpioLed.pGPIOx = GPIOD ;
+	GpioLed.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NUMBER_12 ;
+	GpioLed.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_OUTPUT ;
+	GpioLed.GPIO_PinConfig.GPIO_PinOPType = GPIO_OUT_TYPE_PUSH_PULL ;
+	GpioLed.GPIO_PinConfig.GPIO_PinSpeed = GPIO_SPEED_VERY_HIGH ;
+	GpioLed.GPIO_PinConfig.GPIO_PinPuPdControl = GPIO_PIN_NO_INTERNAL_PULL_UP_PULL_DOWN;
+
+	GPIO_PeriClockControl(GpioLed.pGPIOx , ENABLE ); 			// Enabling the Clock of GPIO Port D
+	GPIO_Init(&GpioLed);		// Initiate the GPIO Registers
+
+
+
+	/* Configuration & initialization of the Button  */
+
+	GpioButton.pGPIOx = GPIOA ;
+	GpioButton.GPIO_PinConfig.GPIO_PinNumber = GPIO_PIN_NUMBER_0 ;
+	GpioButton.GPIO_PinConfig.GPIO_PinMode = GPIO_MODE_INPUT;
+	GpioButton.GPIO_PinConfig.GPIO_PinPuPdControl = GPIO_PIN_NO_INTERNAL_PULL_UP_PULL_DOWN ;
+
+	GPIO_PeriClockControl(GpioButton.pGPIOx , ENABLE );
+	GPIO_Init(&GpioButton);
+
+
+	while(1)
+	{
+		if ( GPIO_ReadFromInputPin( GpioButton.pGPIOx  , GpioButton.GPIO_PinConfig.GPIO_PinNumber) == BUTTON_PRESSED ) // read the status of the Button
+		{
+			GPIO_ToggleOutputPin(GpioLed.pGPIOx , GpioLed.GPIO_PinConfig.GPIO_PinNumber );
+			delay(); 	 /* Debouncing the button (wait until Button State Become Stable , to ignore the noisy unintended transitions of the button State (several high/low transitions)  due to mechanical bouncing of the button when pressed then released ) */
+
+		}// End of if
+	} // End of while
+
+	return 0 ;
+}
+
+
+
+void delay(void)
+{
+	for(uint32_t counter = 0 ; counter< 500000/2 ; counter++);
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
